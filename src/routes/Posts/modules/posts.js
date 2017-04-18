@@ -1,18 +1,6 @@
 import request from 'axios'
 import Posts from 'models/Posts'
-
-const dataMock = `[
-{
-  "id":1,
-  "title":"title",
-  "text":"text"
-},
-{
-  "id":2,
-  "title":"title 2",
-  "text":"text 2"
-}
-]`
+import { mock } from 'mock'
 
 // ------------------------------------
 // Constants
@@ -42,12 +30,13 @@ export const getAllPostsError = (err = {}) => {
   }
 }
 export const getAllPosts = dispatch => {
+  console.log('Mocked request getAllPosts')
   return dispatch => {
     dispatch(getAllPostsPending())
 
     return request.get(``)
       .then(res => {
-        return dispatch(getAllPostsSuccess(JSON.parse(dataMock)))
+        return dispatch(getAllPostsSuccess(JSON.parse(mock)))
       })
       .catch(err => {
         return dispatch(getAllPostsError(err))
